@@ -1,5 +1,6 @@
 import React from 'react';
-import Counter from "./Counter"
+import Counter from "./Counter";
+import Name from "./Name";
 
 //ストアを作成するやつの使用。
 import { createStore } from "redux";
@@ -10,7 +11,20 @@ import { Provider } from "react-redux";
 
 // ストアの初期設定になるリデューサの設定
 function reducer(state, action) {
-  return state
+  switch (action.type) {
+    case "INCREMENT_COUNT":
+      return {
+        ...state,
+        count: state.count + 1
+      }
+    case "DECREMENT_COUNT":
+      return {
+        ...state,
+        count: state.count - 1
+      }
+    default:
+      return state
+  }
 }
 
 //最初のストアを定義
@@ -26,6 +40,7 @@ const App = () => {
     // プロバイダを使用してstoreを渡す
     <Provider store={store}>
       <Counter />
+      <Name></Name>
     </Provider>
   )
 }
