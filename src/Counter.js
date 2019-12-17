@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux"
 
 
 const Counter = () => {
-    const count = useSelector(state => state.count)
+    const {count, name} = useSelector(state => ({
+        ...state.counterReducer,
+        ...state.nameReducer
+    }))
 
     const dispatch = useDispatch()
 
@@ -25,6 +28,7 @@ const Counter = () => {
             <h2>Counter : {count}</h2>
             <button onClick={incrementCount}>+</button>
             <button onClick={decrementCount}>-</button>
+            <h3>your name is : {name}</h3>
         </>
     )
 }
